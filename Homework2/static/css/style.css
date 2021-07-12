@@ -1,0 +1,12 @@
+html, body {
+    background-color: darkslategray;
+}
+
+h2 {
+    color: yellowgreen;
+}
+
+#about_text {
+    color:whitesmoke;
+    float: left;
+}
