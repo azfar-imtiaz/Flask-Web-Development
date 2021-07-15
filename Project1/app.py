@@ -27,6 +27,13 @@ def download_terms_of_use():
 def privacy():
     return render_template('privacy.html')
 
+@app.route('/download_privacy_policy')#, methods=['GET'])
+def download_privacy_policy():
+    return send_file(
+        'static/docs/Privacy_Policy.docx',
+        attachment_filename="Privacy-Policy.docx"
+    )
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('dashboard.html')
