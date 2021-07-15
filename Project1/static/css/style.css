@@ -1,0 +1,71 @@
+.main_body {
+    background-color: darkslategray;
+}
+
+h2, p {
+    color: whitesmoke;
+}
+
+/* About_us CSS */
+
+.about_body {
+    background-image: url("../img/about_us_background.jpg");
+    /* background-attachment: fixed; */
+    background-size: cover;
+    
+}
+
+/* Terms_of_use CSS */
+.terms_of_use_body {
+    background-color: darkslategray;
+}
+
+.terms_of_use_div p {
+    color: white;
+    text-align: center;
+}
+
+.btn-download-terms {
+    display: inline-block;
+    border-radius: 8px;
+    background-color: #287bda;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 200px;
+    /* transition: all 0.5s; */
+    cursor: pointer;
+    margin: 5px;
+    position: absolute;
+    top: 10%;
+    right: 45%;
+}
+  
+.btn-download-terms span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    /* transition: 0.5s; */
+}
+
+.btn-download-terms span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.btn-download-terms:hover span {
+    padding-right: 25px;
+    /* font-size: 18px; */
+    text-align: center;
+}
+  
+.btn-download-terms:hover span:after {
+    opacity: 1;
+    right: 0;
+}
