@@ -6,6 +6,47 @@ h2, p {
     color: whitesmoke;
 }
 
+.btn-go-to-terms-of-use, .btn-go-to-about-us, .btn-go-to-privacy-policy {
+    display: inline-block;
+    text-align: center;
+    border-radius: 6px;
+    border: none;
+    background-color: gray;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.btn-go-to-terms-of-use:hover {
+    opacity: 0.8;
+}
+
+.btn-go-to-about-us:hover {
+    opacity: 0.8;
+}
+
+.btn-go-to-privacy-policy:hover {
+    opacity: 0.8;
+}
+
+.bottom-buttons {
+    display: inline-block;
+    position: absolute;
+    top: 1000px; 
+    left: 1850px;
+}
+
+.vertical-line {
+    border-left: 2px solid white;
+    height: 800px;
+    margin-top: -2em;
+    margin-left: 105em;
+    display: inline-block;
+    /* box-shadow: 2px 0px 2px white; */
+}
+
 /* About_us CSS */
 
 .about_body {
@@ -69,3 +110,4 @@ h2, p {
     opacity: 1;
     right: 0;
 }
+
