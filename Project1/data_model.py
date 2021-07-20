@@ -9,7 +9,7 @@ class DataModel:
     def retrieve_data_single(self, sql_command):
         self.cursor.execute(sql_command)
         results = self.cursor.fetchone()
-        return results[0]
+        return results
 
     def retrieve_data_multiple(self, sql_command):
         self.cursor.execute(sql_command)
@@ -20,8 +20,8 @@ class DataModel:
         self.cursor.execute(sql_command)
         self.commit()
 
-    # def commit(self):
-    #     self.connection.commit()
+    def commit(self):
+        self.connection.commit()
 
     def close_connection(self):
         self.connection.close()
@@ -52,6 +52,20 @@ class DataModel:
         '''
         results = self.retrieve_data_multiple(query)
         return results
+
+    def check_password(self, user_email):
+        query = '''
+            SELECT Password FROM Users WHERE Email = '{}';
+        '''.format(user_email)
+        result = self.retrieve_data_single(query)
+        return result
+
+    def get_user_id(self, user_email):
+        query = '''
+            SELECT UserID FROM Users WHERE Email = '{}';
+        '''.format(user_email)
+        result = self.retrieve_data_single(query)
+        return result[0]
 
     #####################################################
     ###        CRUD operations for Lists table        ###

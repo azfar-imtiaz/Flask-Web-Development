@@ -1,9 +1,30 @@
 {% extends "main_structure.html" %}
 
-{% block main %}
+{% block head %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block body %}
+<body class="dashboard_body"></body>
     <h2>Welcome, user!</h2>
     <p>This is the page the user is taken to after a successful login</p>
     <br><br><br>
     <p>Here, you can view all your lists</p>
+
+    <ul>
+        {% for elem in data %}
+        <li style="color: white;">
+            <button>{{ elem }}</button>
+        </li>
+        {% endfor %}
+    </ul>    
+    <br><br><br>
+
+    <a href="/logout">
+        <button class="btn-logout">
+            <span>Logout</span>
+        </button>
+    </a>
+</body>
     
-{% endblock main %}
+{% endblock %}

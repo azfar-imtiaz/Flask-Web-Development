@@ -1,11 +1,16 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, request, render_template, send_file
+from flask.helpers import url_for
+from werkzeug.utils import redirect
+from data_model import DataModel
 
 
 app = Flask(__name__)
+model = DataModel(db_name='../ToDoList.db')
 
 
 @app.route('/', methods=['GET'])
 def home():
+    # TODO: Some session verification stuff will happen here
     return render_template('main_structure.html')
 
 @app.route('/about', methods=['GET'])
@@ -36,7 +41,23 @@ def download_privacy_policy():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('dashboard.html')
+    if request.method == 'POST':
+        user_email = request.form['user_email']
+        password = request.form['password']
+        db_password = model.check_password(user_email)
+        if db_password is not None:
+            db_password = db_password[0]
+            if db_password == password:
+                # return redirect(url_for('home'))
+                user_id = model.get_user_id(user_email)
+                list_names = model.get_all_list_names(user_id)
+                list_names = [a[0] for a in list_names]
+                return render_template('dashboard.html', data=list_names)
+            else:
+                return render_template('main_structure.html', message='Wrong username or password')    
+        else:
+            return render_template('main_structure.html', message='Wrong username or password')
+    return render_template('main_structure.html')
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
@@ -55,7 +76,7 @@ def create_new_list():
 def view_list():
     return render_template('view_list.html')
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
     return render_template('main_structure.html')
 

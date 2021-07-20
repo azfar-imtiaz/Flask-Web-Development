@@ -18,6 +18,26 @@
         <br><br><br>
         <p>Here, there will also be a button that takes the user to the sign up page</p>
 
+        <h2>Login Form</h2>
+
+        <form action="/login" method="post">
+            <div class="img-container">
+                <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
+            </div>
+
+            <div class="login-container">
+                <label for="user_email"><b>Email</b></label><br>
+                <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+
+                <label for="password"><b>Password</b></label><br>
+                <input type="password" placeholder="Enter Password" name="password" required><br>
+
+                <button class="btn-login" type="submit">Login</button>
+
+                <p style="color: red;">{{ message }}</p>
+            </div>
+        </form>
+
         <div class="vertical-line"></div>
 
         <div class="bottom-buttons">
