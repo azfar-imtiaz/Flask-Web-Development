@@ -1,7 +1,41 @@
 {% extends "main_structure.html" %}
 
-{% block main %}
+{% block head %}
+    <title>List View</title>
+{% endblock %}
+
+{% block body %}
+<body class="list_view_body">
     <h2>Here you can view your selected list!</h2>
-    <p>Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p>
+    <p style="color: whitesmoke;">Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p>
+
+    <h4 style="color: whitesmoke;">
+        Incomplete Tasks:
+    </h4>
+    <form action="/check_off_items/{{ list_tasks_dict['list_id'] }}" method="POST">
+        {% for task in list_tasks_dict['list_tasks'] %}
+        {% if task[2] == 0 %}
+        <input type="checkbox" id="{{ task[1] }}" name="task_name" value="{{ task[0] }}">
+        <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
+        <br><br>
+        {% endif %}
+        {% endfor %}
+        <button type="submit">Mark Selected Tasks as Done</button>
+    </form>
+
+    <h4 style="color: whitesmoke;">
+        Completed Tasks:
+    </h4>
+    <!-- <ul> -->
+        {% for task in list_tasks_dict['list_tasks'] %}
+        {% if task[2] == 1 %}
+        <!-- <li style="color: whitesmoke;">{{ task[1] }}</li> -->
+        <input type="checkbox" id="{{ task[1] }}" name="task_name" checked='checked' onclick="return false;">
+        <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
+        <br><br>
+        {% endif %}
+        {% endfor %}
+    <!-- </ul> -->
+</body>
     
-{% endblock main %}
+{% endblock %}

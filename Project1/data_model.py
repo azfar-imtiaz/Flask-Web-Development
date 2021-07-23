@@ -89,8 +89,16 @@ class DataModel:
     def get_list(self, user_id, list_name):
         query = '''
             SELECT * FROM Lists
-            WHERE UserID = '{}' AND ListName = '{list_name}';
+            WHERE UserID = '{}' AND ListName = '{}';
         '''.format(user_id, list_name)
+        result = self.retrieve_data_single(query)
+        return result
+
+    def get_list_id(self, list_name):
+        query = '''
+            SELECT ListID FROM Lists
+            WHERE ListName = '{}'
+        '''.format(list_name)
         result = self.retrieve_data_single(query)
         return result
 
@@ -123,13 +131,21 @@ class DataModel:
         '''.format(updated_task_name, list_id, task_id)
         self.insert_data(query)
 
-    def update_task_status(self, list_id, task_id, updated_task_status):
+    # def update_task_status(self, list_id, task_id, updated_task_status):
+    def update_task_status(self, task_ids, updated_task_status):
+        # NOTE: Here, task_ids is a tuple
         # NOTE: ListID might not be required here
+        # query = '''
+        #     UPDATE Tasks
+        #     SET Status = '{}'
+        #     WHERE list_id = '{}' and task_id = '{}';
+        # '''.format(updated_task_status, list_id, task_id)
         query = '''
             UPDATE Tasks
-            SET Status = '{}'
-            WHERE list_id = '{}' and task_id = '{}';
-        '''.format(updated_task_status, list_id, task_id)
+            SET Status = {}
+            WHERE TaskID IN ({});
+        '''.format(updated_task_status, ','.join(task_ids))
+        print(query)
         self.insert_data(query)
 
     def delete_all_tasks(self, list_id):

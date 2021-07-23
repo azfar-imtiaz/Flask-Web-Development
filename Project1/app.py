@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, send_file
 from flask.helpers import url_for
+from flask.templating import render_template_string
 from werkzeug.utils import redirect
 from data_model import DataModel
 
@@ -58,6 +59,32 @@ def login():
         else:
             return render_template('main_structure.html', message='Wrong username or password')
     return render_template('main_structure.html')
+
+@app.route('/display_list', methods=['POST'])
+def display_list():
+    list_name = request.form['list_name']
+    list_id = model.get_list_id(list_name)
+    if list_id is not None:
+        list_id = list_id[0]
+        return redirect(url_for('display_list_with_id', list_id=list_id))
+        
+
+@app.route('/display_list/<list_id>')
+def display_list_with_id(list_id):
+    list_tasks = model.get_all_tasks(list_id)
+    list_tasks_dict = {
+        'list_id': list_id,
+        'list_tasks': list_tasks
+    }
+    return render_template('view_list.html', list_tasks_dict=list_tasks_dict)
+
+@app.route('/check_off_items/<int:list_id>', methods=['POST'])
+def check_off_items(list_id):
+    marked_tasks_ids = request.form['task_name']
+    marked_tasks_ids = list(marked_tasks_ids)
+    print(marked_tasks_ids)
+    model.update_task_status(marked_tasks_ids, updated_task_status=1)
+    return redirect(url_for('display_list_with_id', list_id=list_id))
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():

@@ -11,13 +11,22 @@
     <br><br><br>
     <p>Here, you can view all your lists</p>
 
-    <ul>
+    <!-- <ul>
         {% for elem in data %}
         <li style="color: white;">
             <button>{{ elem }}</button>
         </li>
         {% endfor %}
-    </ul>    
+    </ul>     -->
+
+    <form action="/display_list" method="POST">
+        {% for elem in data %}
+        <input type="radio" id="{{ elem }}" name="list_name" value="{{elem}}">
+        <label for="{{ elem }}">{{elem}}</label><br>
+        {% endfor %}
+        <button type="submit">View List</button>
+    </form>
+
     <br><br><br>
 
     <a href="/logout">
