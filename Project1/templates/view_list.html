@@ -6,36 +6,50 @@
 
 {% block body %}
 <body class="list_view_body">
-    <h2>Here you can view your selected list!</h2>
-    <p style="color: whitesmoke;">Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p>
+    <h2>{{ list_tasks_dict['list_name'] }}</h2>
+    <!-- <p style="color: whitesmoke;">Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p> -->
 
-    <h4 style="color: whitesmoke;">
+    <h3 style="color: whitesmoke;">
         Incomplete Tasks:
-    </h4>
-    <form action="/check_off_items/{{ list_tasks_dict['list_id'] }}" method="POST">
+    </h3>
+    <form action="/check_off_items/{{ list_tasks_dict['list_id'] }}" method="post">
         {% for task in list_tasks_dict['list_tasks'] %}
         {% if task[2] == 0 %}
-        <input type="checkbox" id="{{ task[1] }}" name="task_name" value="{{ task[0] }}">
+        <input type="checkbox" id="{{ task[1] }}" name="task_id" value="{{ task[0] }}">
         <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
         <br><br>
         {% endif %}
         {% endfor %}
-        <button type="submit">Mark Selected Tasks as Done</button>
+        <button type="submit" name="action" value="Complete">Mark Selected Tasks as Done</button>
+        <button type="submit" name="action" value="Delete">Delete Selected Tasks</button>
     </form>
 
-    <h4 style="color: whitesmoke;">
+    <h3 style="color: whitesmoke;">
         Completed Tasks:
-    </h4>
+    </h3>
     <!-- <ul> -->
         {% for task in list_tasks_dict['list_tasks'] %}
         {% if task[2] == 1 %}
         <!-- <li style="color: whitesmoke;">{{ task[1] }}</li> -->
-        <input type="checkbox" id="{{ task[1] }}" name="task_name" checked='checked' onclick="return false;">
+        <input type="checkbox" id="{{ task[1] }}" name="task_id" checked='checked' onclick="return false;">
         <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
         <br><br>
         {% endif %}
         {% endfor %}
     <!-- </ul> -->
+
+    <div class="add_task_container">
+        <h2>
+            Add New Task
+        </h2>
+        <form action="/add_new_task/{{ list_tasks_dict['list_id'] }}", method="post">
+            <label for="task_name" style="color: whitesmoke;"><b>Task name:</b></label><br>
+            <input type="text" placeholder="Enter task name" name="task_name" required><br>
+            
+            <button class="btn-add-task" type="submit">Add Task</button>
+        </form>
+    </div>
+
 </body>
     
 {% endblock %}

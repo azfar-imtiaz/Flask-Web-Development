@@ -145,7 +145,6 @@ class DataModel:
             SET Status = {}
             WHERE TaskID IN ({});
         '''.format(updated_task_status, ','.join(task_ids))
-        print(query)
         self.insert_data(query)
 
     def delete_all_tasks(self, list_id):
@@ -155,11 +154,11 @@ class DataModel:
         '''.format(list_id)
         self.insert_data(query)
 
-    def delete_task(self, task_id):
+    def delete_tasks(self, task_ids):
         query = '''
             DELETE FROM Tasks
-            WHERE TaskID = '{}';
-        '''.format(task_id)
+            WHERE TaskID IN ({});
+        '''.format(','.join(task_ids))
         self.insert_data(query)
 
     def get_all_tasks(self, list_id):

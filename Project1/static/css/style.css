@@ -57,7 +57,7 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
-.btn-login {
+.btn-login, .btn-add-task, .btn-view-list {
     background-color: #04AA6D;
     color: white;
     border-radius: 8px;
@@ -177,6 +177,7 @@ img.login-avatar {
     width: 200px;
     margin: 5px;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .btn-logout:hover {
@@ -187,4 +188,12 @@ img.login-avatar {
 
 .list_view_body {
     background-color: darkslategray;
+}
+
+.add_task_container {
+    color: whitesmoke;
+    position: absolute;
+    top: 100px;
+    left: 1500px;
+    /* padding: 20px; */
 }

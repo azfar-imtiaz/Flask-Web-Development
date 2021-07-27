@@ -19,15 +19,30 @@
         {% endfor %}
     </ul>     -->
 
-    <form action="/display_list" method="POST">
+    <h2 style="color: whitesmoke;">Current Lists</h2>
+    <form action="/display_list" style="color: whitesmoke; font-size: large;" method="post">
         {% for elem in data %}
         <input type="radio" id="{{ elem }}" name="list_name" value="{{elem}}">
-        <label for="{{ elem }}">{{elem}}</label><br>
+        <label for="{{ elem }}">{{elem}}</label><br><br>
         {% endfor %}
-        <button type="submit">View List</button>
+        <br>
+        <button class="btn-view-list" name="action" type="submit" value="View">View List</button>
+        <button class="btn-view-list" name="action" type="submit" value="Delete">Delete List</button>
     </form>
 
     <br><br><br>
+
+    <div class="add-list-container">
+        <h2>
+            Add New List
+        </h2>
+        <form action="/create_new_list", method="post">
+            <label for="List name"><b>List name:</b></label><br>
+            <input type="text" placeholder="Enter list name" name="list_name" required><br>
+            
+            <button class="btn-add-list" type="submit">Add Task</button>
+        </form>
+    </div>
 
     <a href="/logout">
         <button class="btn-logout">
