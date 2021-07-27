@@ -34,14 +34,14 @@ h2, p {
 .bottom-buttons {
     display: inline-block;
     position: absolute;
-    top: 1000px; 
+    top: 1200px; 
     left: 1810px;
 }
 
 .vertical-line {
     border-left: 2px solid white;
     height: 800px;
-    margin-top: -2em;
+    margin-top: 18.5em;
     margin-left: 105em;
     display: inline-block;
     /* box-shadow: 2px 0px 2px white; */
@@ -72,16 +72,25 @@ input[type=text], input[type=password] {
     opacity: 0.8;
 }
 
-.img-container {
+.login-img-container {
     /* text-align: right; */
     margin: 24px 0 12px 0;    
 }
 
 img.login-avatar {
-    width: 15%;
+    width: 10%;
     border-radius: 50%;
     position: absolute;
-    left: 1920px;
+    left: 1810px;
+    top: 370px;
+}
+
+img.signup-avatar {
+    width: 8%;
+    border-radius: 50%;
+    position: absolute;
+    left: 1350px;
+    top: 400px;
 }
 
 .login-container {
@@ -95,6 +104,22 @@ img.login-avatar {
     color: whitesmoke;
 }
 
+.signup-container {
+    position: absolute;
+    top: 607px;
+    left: 1320px;
+    padding: 20px;
+}
+
+.signup-container label {
+    color: whitesmoke;
+}
+
+.signup-login-forms {
+    position: relative;
+    top: -320px;
+    /* left: 50px; */
+}
 
 /* About_us CSS */
 

@@ -1,6 +1,5 @@
-from flask import Flask, request, render_template, send_file, session, g, flash
+from flask import Flask, request, render_template, send_file, session, g
 from flask.helpers import url_for
-from flask.templating import render_template_string
 from werkzeug.utils import redirect
 from data_model import DataModel
 
@@ -73,9 +72,9 @@ def login():
                 session['user_id'] = model.get_user_id(user_email)
                 return redirect(url_for('home'))
             else:
-                return render_template('main_structure.html', message='Wrong username or password')    
+                return render_template('main_structure.html', login_message='Wrong username or password')    
         else:
-            return render_template('main_structure.html', message='Wrong username or password')
+            return render_template('main_structure.html', login_message='Wrong username or password')
     return render_template('main_structure.html')
 
 @app.route('/display_list', methods=['POST'])
@@ -116,10 +115,14 @@ def add_new_task():
     model.create_new_task(session['current_list_id'], task_name, status=0)
     return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name = session['current_list_name']))
 
-@app.route('/sign_up', methods=['GET', 'POST'])
+@app.route('/sign_up', methods=['POST'])
 def sign_up():
-    return render_template('sign_up.html')
-
+    user_email = request.form['user_email']
+    username = request.form['username']
+    password = request.form['password']
+    model.add_user(user_email, password, username)
+    return render_template('main_structure.html', signup_message='User added successfully!')
+    
 # This might not be needed
 # @app.route('/dashboard', methods=['GET', 'POST'])
 # def dashboard():

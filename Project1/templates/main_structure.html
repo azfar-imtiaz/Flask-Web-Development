@@ -20,26 +20,53 @@
 
         <h2>Login Form</h2>
 
-        <form action="/login" method="post">
-            <div class="img-container">
-                <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
-            </div>
+        <div class="signup-login-forms">
 
-            <div class="login-container">
-                <label for="user_email"><b>Email</b></label><br>
-                <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+            <form action="/login" method="post">
+                <div class="login-img-container">
+                    <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
+                </div>
 
-                <label for="password"><b>Password</b></label><br>
-                <input type="password" placeholder="Enter Password" name="password" required><br>
+                <div class="login-container">
+                    <h2 style="color: #04AA6D;"><b>Login</b></h2>
+                    <label for="user_email"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
 
-                <button class="btn-login" type="submit">Login</button>
+                    <label for="password"><b>Password</b></label><br>
+                    <input type="password" placeholder="Enter Password" name="password" required><br>
 
-                <p style="color: red;">{{ message }}</p>
-            </div>
-        </form>
+                    <button class="btn-login" type="submit">Login</button>
 
-        <div class="vertical-line"></div>
+                    <p style="color: red;">{{ login_message }}</p>
+                </div>
+            </form>
 
+            <div class="vertical-line"></div>
+
+            <form action="/sign_up" method="post">
+                <div class="signup-img-container">
+                    <img src="../static/img/signup_avatar.png" alt="Avatar" class="signup-avatar">
+                </div>
+
+                <div class="signup-container">
+                    <h2 style="color: #04AA6D;"><b>Sign up!</b></h2>
+                    <label for="user_email"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+
+                    <label for="username"><b>Username</b></label><br>
+                    <input type="text" placeholder="Enter Username" name="username" required><br><br>
+
+                    <label for="password"><b>Password</b></label><br>
+                    <input type="password" placeholder="Enter Password" name="password" required><br>
+
+                    <button class="btn-login" type="submit">Sign up!</button>
+
+                    <p style="color: greenyellow;">{{ signup_message }}</p>
+                </div>
+            </form>
+        </div>
+
+        
         <div class="bottom-buttons">
             <a href="/terms_of_use">
                 <button class="btn-go-to-terms-of-use">
