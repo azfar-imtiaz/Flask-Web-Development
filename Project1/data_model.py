@@ -1,3 +1,4 @@
+from re import DEBUG
 import sqlite3
 
 
@@ -76,6 +77,14 @@ class DataModel:
             INSERT INTO Lists (UserID, ListName)
             VALUES ('{}', '{}');
         '''.format(user_id, list_name)
+        self.insert_data(query)
+
+    def edit_list_name(self, list_id, updated_list_name):
+        query = '''
+            UPDATE Lists
+            SET ListName = '{}'
+            WHERE ListID = '{}';
+        '''.format(updated_list_name, list_id)
         self.insert_data(query)
 
     def get_all_list_names(self, user_id):

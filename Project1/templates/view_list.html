@@ -12,7 +12,7 @@
     <h3 style="color: whitesmoke;">
         Incomplete Tasks:
     </h3>
-    <form action="/check_off_items/{{ list_tasks_dict['list_id'] }}" method="post">
+    <form action="/check_off_items" method="post">
         {% for task in list_tasks_dict['list_tasks'] %}
         {% if task[2] == 0 %}
         <input type="checkbox" id="{{ task[1] }}" name="task_id" value="{{ task[0] }}">
@@ -42,11 +42,23 @@
         <h2>
             Add New Task
         </h2>
-        <form action="/add_new_task/{{ list_tasks_dict['list_id'] }}", method="post">
+        <form action="/add_new_task", method="post">
             <label for="task_name" style="color: whitesmoke;"><b>Task name:</b></label><br>
             <input type="text" placeholder="Enter task name" name="task_name" required><br>
             
             <button class="btn-add-task" type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div class="edit_list_name_container">
+        <h2>
+            Edit List Name
+        </h2>
+        <form action="/edit_list", method="post">
+            <label for="updated_list_name" style="color: whitesmoke;"><b>New list name:</b></label><br>
+            <input type="text" placeholder="Enter updated list name" name="updated_list_name" required><br>
+            
+            <button class="btn-add-task" type="submit">Update List</button>
         </form>
     </div>
 

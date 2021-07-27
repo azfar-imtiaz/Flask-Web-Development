@@ -25,6 +25,8 @@ def home():
     if 'user_id' in session:
         # g.user_id = session['user_id']
         # list_names = model.get_all_list_names(session['user_id'])
+        session['current_list_id'] = None
+        session['current_list_name'] = None
         list_names = model.get_all_list_names(g.user_id)
         list_names = [a[0] for a in list_names]        
         return render_template('dashboard.html', data=list_names)
@@ -89,8 +91,8 @@ def display_list():
 
 @app.route('/display_list/<int:list_id>/<string:list_name>')
 def display_list_with_id(list_id, list_name):
-    print(list_id)
-    print(list_name)
+    session['current_list_id'] = list_id
+    session['current_list_name'] = list_name
     list_tasks = model.get_all_tasks(list_id)
     list_tasks_dict = {
         'list_id': list_id,
@@ -99,29 +101,29 @@ def display_list_with_id(list_id, list_name):
     }
     return render_template('view_list.html', list_tasks_dict=list_tasks_dict)
 
-@app.route('/check_off_items/<int:list_id>', methods=['POST'])
-def check_off_items(list_id):
+@app.route('/check_off_items', methods=['POST'])
+def check_off_items():
     marked_tasks_ids = request.form.getlist('task_id')
     if request.form['action'] == 'Complete':
         model.update_task_status(marked_tasks_ids, updated_task_status=1)
     elif request.form['action'] == 'Delete':
         model.delete_tasks(marked_tasks_ids)
-    return redirect(url_for('display_list_with_id', list_id=list_id))
+    return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name=session['current_list_name']))
 
-@app.route('/add_new_task/<int:list_id>', methods=['POST'])
-def add_new_task(list_id):
+@app.route('/add_new_task', methods=['POST'])
+def add_new_task():
     task_name = request.form['task_name']
-    model.create_new_task(list_id, task_name, status=0)
-    return redirect(url_for('display_list_with_id', list_id=list_id))
+    model.create_new_task(session['current_list_id'], task_name, status=0)
+    return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name = session['current_list_name']))
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
     return render_template('sign_up.html')
 
 # This might not be needed
-@app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
-    return render_template('dashboard.html')
+# @app.route('/dashboard', methods=['GET', 'POST'])
+# def dashboard():
+#     return render_template('dashboard.html')
 
 @app.route('/create_new_list', methods=['POST'])
 def create_new_list():
@@ -133,6 +135,15 @@ def create_new_list():
 def delete_list(list_name):
     model.delete_list(g.user_id, list_name)
     return redirect(url_for('home'))
+
+@app.route('/edit_list', methods=['POST'])
+def edit_list():
+    updated_list_name = request.form['updated_list_name']
+    session['current_list_name'] = updated_list_name
+    model.edit_list_name(
+        session['current_list_id'], updated_list_name
+    )
+    return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name=session['current_list_name']))
 
 # @app.route('/view_list', methods=['GET'])
 # def view_list():

@@ -197,3 +197,10 @@ img.login-avatar {
     left: 1500px;
     /* padding: 20px; */
 }
+
+.edit_list_name_container {
+    color: whitesmoke;
+    position: absolute;
+    top: 350px;
+    left: 1500px;
+}
