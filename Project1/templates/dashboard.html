@@ -6,7 +6,7 @@
 
 {% block body %}
 <body class="dashboard_body"></body>
-    <h2>Welcome, user!</h2>
+    <h2>Welcome, {{ data['username'] }}!</h2>
     <p>This is the page the user is taken to after a successful login</p>
     <br><br><br>
     <p>Here, you can view all your lists</p>
@@ -21,7 +21,7 @@
 
     <h2 style="color: whitesmoke;">Current Lists</h2>
     <form action="/display_list" style="color: whitesmoke; font-size: large;" method="post">
-        {% for elem in data %}
+        {% for elem in data['list_names'] %}
         <input type="radio" id="{{ elem }}" name="list_name" value="{{elem}}">
         <label for="{{ elem }}">{{elem}}</label><br><br>
         {% endfor %}
@@ -37,10 +37,10 @@
             Add New List
         </h2>
         <form action="/create_new_list", method="post">
-            <label for="List name"><b>List name:</b></label><br>
+            <label for="List name" style="color: whitesmoke;"><b>List name:</b></label><br>
             <input type="text" placeholder="Enter list name" name="list_name" required><br>
             
-            <button class="btn-add-list" type="submit">Add Task</button>
+            <button class="btn-view-list" type="submit">Add Task</button>
         </form>
     </div>
 

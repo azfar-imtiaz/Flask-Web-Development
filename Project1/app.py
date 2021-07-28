@@ -28,7 +28,10 @@ def home():
         session['current_list_name'] = None
         list_names = model.get_all_list_names(g.user_id)
         list_names = [a[0] for a in list_names]        
-        return render_template('dashboard.html', data=list_names)
+        return render_template('dashboard.html', data={
+            'username': session['username'],
+            'list_names': list_names
+        })
     return render_template('main_structure.html')
 
 @app.route('/about', methods=['GET'])
@@ -70,6 +73,7 @@ def login():
             if db_password == password:
                 # session['user_email'] = user_email
                 session['user_id'] = model.get_user_id(user_email)
+                session['username'] = model.get_user_name(user_email)
                 return redirect(url_for('home'))
             else:
                 return render_template('main_structure.html', login_message='Wrong username or password')    

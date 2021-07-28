@@ -68,6 +68,13 @@ class DataModel:
         result = self.retrieve_data_single(query)
         return result[0]
 
+    def get_user_name(self, user_email):
+        query = '''
+            SELECT Username FROM Users WHERE Email = '{}';
+        '''.format(user_email)
+        result = self.retrieve_data_single(query)
+        return result[0]
+
     #####################################################
     ###        CRUD operations for Lists table        ###
     #####################################################

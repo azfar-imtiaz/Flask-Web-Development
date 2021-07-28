@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .main_body {
     background-color: darkslategray;
 }
@@ -33,17 +39,20 @@ h2, p {
 
 .bottom-buttons {
     display: inline-block;
-    position: absolute;
-    top: 1200px; 
-    left: 1810px;
+    position: relative;
+    top: 870px; 
+    left: 95px;
 }
 
 .vertical-line {
     border-left: 2px solid white;
-    height: 800px;
-    margin-top: 18.5em;
-    margin-left: 105em;
-    display: inline-block;
+    height: 650px;
+    position:relative;
+    left: 340px;
+    top: 25px;
+    /* margin-top: 18.5em; */
+    /* margin-left: 105em; */
+    /* display: inline-block; */
     /* box-shadow: 2px 0px 2px white; */
 }
 
@@ -77,26 +86,33 @@ input[type=text], input[type=password] {
     margin: 24px 0 12px 0;    
 }
 
+img.homepage-image {
+    width: 25%;
+    position: relative;
+    top: 350px;
+    /* left: 200px; */
+}
+
 img.login-avatar {
-    width: 10%;
-    border-radius: 50%;
-    position: absolute;
-    left: 1810px;
-    top: 370px;
+    width: 33%;
+    /* border-radius: 50%; */
+    position: relative;
+    left: 40px;
+    top: 50px;
 }
 
 img.signup-avatar {
-    width: 8%;
-    border-radius: 50%;
-    position: absolute;
-    left: 1350px;
-    top: 400px;
+    width: 28%;
+    /* border-radius: 50%; */
+    position: relative;
+    left: 55px;
+    top: 30px;
 }
 
 .login-container {
-    position: absolute;
-    top: 700px;
-    left: 1800px;
+    position: relative;
+    /* top: 700px;
+    left: 1800px; */
     padding: 20px;
 }
 
@@ -105,9 +121,9 @@ img.signup-avatar {
 }
 
 .signup-container {
-    position: absolute;
-    top: 607px;
-    left: 1320px;
+    position: relative;
+    /* top: 607px;
+    left: 1320px; */
     padding: 20px;
 }
 
@@ -115,10 +131,21 @@ img.signup-avatar {
     color: whitesmoke;
 }
 
+.login-form-img-container {
+    position: absolute;
+    top: -12px;
+}
+
+.signup-form-img-container {
+    position: absolute;
+    top: 39px;
+    left: 400px;
+}
+
 .signup-login-forms {
-    position: relative;
-    top: -320px;
-    /* left: 50px; */
+    position: absolute;
+    top: 10em;
+    left: 5em;
 }
 
 /* About_us CSS */
@@ -126,8 +153,15 @@ img.signup-avatar {
 .about_body {
     background-image: url("../img/about_us_background.jpg");
     /* background-attachment: fixed; */
-    background-size: cover;
-    
+    background-size: cover;    
+}
+
+.about-us-text {
+    background-color: teal;
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0.9;
 }
 
 /* Terms_of_use CSS */
@@ -207,6 +241,13 @@ img.signup-avatar {
 
 .btn-logout:hover {
     opacity: 0.8;
+}
+
+.add-list-container {
+    color: whitesmoke;
+    position: absolute;
+    top: 100px;
+    left: 1500px;
 }
 
 /* View_list CSS */

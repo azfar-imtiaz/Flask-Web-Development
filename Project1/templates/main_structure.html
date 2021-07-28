@@ -12,58 +12,58 @@
 
     {% block body %}
     <body class="main_body">
-        <p>This is the main homepage that anyone sees when they first open the link</p>
-        <br><br><br>
-        <p>Here the login functionality will exist</p>
-        <br><br><br>
-        <p>Here, there will also be a button that takes the user to the sign up page</p>
+        <p style="color: greenyellow; font-size: 48px; position: absolute; left: 105px; top: 10px;"><b>To-Do List!</b></p>
 
-        <h2>Login Form</h2>
+        <!-- <img src="../static/img/todo_list.png" alt="Main Image" class="homepage-image"> -->
 
         <div class="signup-login-forms">
 
-            <form action="/login" method="post">
-                <div class="login-img-container">
-                    <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
-                </div>
+            <div class="login-form-img-container">
+                <form action="/login" method="post">
+                    <div class="login-img-container">
+                        <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
+                    </div>
 
-                <div class="login-container">
-                    <h2 style="color: #04AA6D;"><b>Login</b></h2>
-                    <label for="user_email"><b>Email</b></label><br>
-                    <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+                    <div class="login-container">
+                        <h2 style="color: #04AA6D;"><b>Login</b></h2>
+                        <label for="user_email"><b>Email</b></label><br>
+                        <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
 
-                    <label for="password"><b>Password</b></label><br>
-                    <input type="password" placeholder="Enter Password" name="password" required><br>
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" placeholder="Enter Password" name="password" required><br>
 
-                    <button class="btn-login" type="submit">Login</button>
+                        <button class="btn-login" type="submit">Login</button>
 
-                    <p style="color: red;">{{ login_message }}</p>
-                </div>
-            </form>
+                        <p style="color: red;">{{ login_message }}</p>
+                    </div>
+                </form>
+            </div>
 
             <div class="vertical-line"></div>
 
-            <form action="/sign_up" method="post">
-                <div class="signup-img-container">
-                    <img src="../static/img/signup_avatar.png" alt="Avatar" class="signup-avatar">
-                </div>
+            <div class="signup-form-img-container">
+                <form action="/sign_up" method="post">
+                    <div class="signup-img-container">
+                        <img src="../static/img/signup_avatar.png" alt="Avatar" class="signup-avatar">
+                    </div>
 
-                <div class="signup-container">
-                    <h2 style="color: #04AA6D;"><b>Sign up!</b></h2>
-                    <label for="user_email"><b>Email</b></label><br>
-                    <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+                    <div class="signup-container">
+                        <h2 style="color: #04AA6D;"><b>Sign up!</b></h2>
+                        <label for="user_email"><b>Email</b></label><br>
+                        <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
 
-                    <label for="username"><b>Username</b></label><br>
-                    <input type="text" placeholder="Enter Username" name="username" required><br><br>
+                        <label for="username"><b>Username</b></label><br>
+                        <input type="text" placeholder="Enter Username" name="username" required><br><br>
 
-                    <label for="password"><b>Password</b></label><br>
-                    <input type="password" placeholder="Enter Password" name="password" required><br>
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" placeholder="Enter Password" name="password" required><br>
 
-                    <button class="btn-login" type="submit">Sign up!</button>
+                        <button class="btn-login" type="submit">Sign up!</button>
 
-                    <p style="color: greenyellow;">{{ signup_message }}</p>
-                </div>
-            </form>
+                        <p style="color: greenyellow;">{{ signup_message }}</p>
+                    </div>
+                </form>
+            </div>
         </div>
 
         
