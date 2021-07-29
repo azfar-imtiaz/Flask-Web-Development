@@ -34,7 +34,12 @@
 
                         <button class="btn-login" type="submit">Login</button>
 
-                        <p style="color: red;">{{ login_message }}</p>
+                        {% for msg in get_flashed_messages(category_filter=['login-error']) %}
+                        <div class="alert alert-failure">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
                     </div>
                 </form>
             </div>
@@ -60,7 +65,12 @@
 
                         <button class="btn-login" type="submit">Sign up!</button>
 
-                        <p style="color: greenyellow;">{{ signup_message }}</p>
+                        {% for category, msg in get_flashed_messages(with_categories=true) %}
+                        <div class="alert alert-{{ category }}">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
                     </div>
                 </form>
             </div>

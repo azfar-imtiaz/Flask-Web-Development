@@ -228,19 +228,25 @@ img.signup-avatar {
 .btn-logout {
     display: inline-block;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
     background-color: #f44336;
     color: white;
-    padding: 20px;
-    width: 200px;
-    margin: 5px;
-    font-size: 18px;
+    padding: 14px 20px;
+    /* width: 200px; */
+    margin: 8px 0;
+    font-size: 16px;
     cursor: pointer;
 }
 
 .btn-logout:hover {
     opacity: 0.8;
+}
+
+.view-lists-container {
+    color: whitesmoke;
+    font-size: medium;
+    position: absolute;
 }
 
 .add-list-container {
@@ -253,16 +259,25 @@ img.signup-avatar {
 /* The alert message box */
 .alert {
     padding: 12px;
-    width: 30em;
-    background-color: #f44336; /* Red */
+    /* width: 30em; */
     color: white;
     margin-bottom: 7px;
+    margin-top: 10px;
     border-radius: 6px;
     opacity: 0.85;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: yellowgreen; /* Red */
+}
+
+.alert-failure {
+    background-color: #f44336; /* Red */
 }
   
-  /* The close button */
-  .closebtn {
+/* The close button */
+.closebtn {
     margin-left: 15px;
     color: white;
     font-weight: bold;
@@ -273,8 +288,8 @@ img.signup-avatar {
     transition: 0.3s;
 }
   
-  /* When moving the mouse over the close button */
-  .closebtn:hover {
+/* When moving the mouse over the close button */
+.closebtn:hover {
     color: black;
 }
 

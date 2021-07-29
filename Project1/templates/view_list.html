@@ -6,38 +6,46 @@
 
 {% block body %}
 <body class="list_view_body">
-    <h2>{{ list_tasks_dict['list_name'] }}</h2>
-    <!-- <p style="color: whitesmoke;">Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p> -->
+    <form action="/list_view_panel" method="post">
+        <button type="submit" class="btn-login" name="action" value="home">Home</button>
+        <button type="submit" class="btn-login" name="action" value="logout" style="background-color: #f44336;">Logout</button>
+    </form>
 
+    <br>
+    
+    <h2>{{ list_tasks_dict['list_name'] }}</h2>
+    <br>
+    
     <h3 style="color: greenyellow;">
         Incomplete Tasks:
     </h3>
-    <form action="/check_off_items" method="post">
+    <form action="/check_items" method="post">
         {% for task in list_tasks_dict['list_tasks'] %}
         {% if task[2] == 0 %}
         <input type="checkbox" id="{{ task[1] }}" name="task_id" value="{{ task[0] }}">
-        <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
+        <label for="task_name" style="color: white;">{{ task[1] }}</label>
         <br><br>
         {% endif %}
         {% endfor %}
-        <button type="submit" name="action" value="Complete" class="btn-login">Mark Selected Tasks as Done</button>
+        <button type="submit" name="action" value="Check" class="btn-login">Mark Selected Tasks as <b>Done</b></button>
         <button type="submit" name="action" value="Delete" class="btn-login">Delete Selected Tasks</button>
     </form>
 
     <h3 style="color: greenyellow;">
         Completed Tasks:
     </h3>
-    <!-- <ul> -->
+    <form action="/uncheck_items" method="post">
         {% for task in list_tasks_dict['list_tasks'] %}
         {% if task[2] == 1 %}
-        <!-- <li style="color: whitesmoke;">{{ task[1] }}</li> -->
-        <input type="checkbox" id="{{ task[1] }}" name="task_id" checked='checked' onclick="return false;">
-        <label for="task_name" style="color: whitesmoke;">{{ task[1] }}</label>
+        <input type="checkbox" id="{{ task[1] }}" name="task_id" value="{{ task[0] }}">
+        <label for="task_name" style="color: lightgray;">{{ task[1] }}</label>
         <br><br>
         {% endif %}
         {% endfor %}
-    <!-- </ul> -->
-
+        <button type="submit" name="action" value="Check" class="btn-login">Mark Selected Tasks as <b>Undone</b></button>
+        <button type="submit" name="action" value="Delete" class="btn-login">Delete Selected Tasks</button>
+    </form>
+    
     <div class="add_task_container">
         <h2 style="color: greenyellow;">
             Add New Task
@@ -49,7 +57,7 @@
             <button class="btn-add-task" type="submit">Add Task</button>
 
             {% for msg in get_flashed_messages() %}
-            <div class="alert">
+            <div class="alert alert-failure">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{ msg }}            
             </div>
