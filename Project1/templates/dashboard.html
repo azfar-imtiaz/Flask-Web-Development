@@ -7,9 +7,9 @@
 {% block body %}
 <body class="dashboard_body"></body>
     <h2>Welcome, {{ data['username'] }}!</h2>
-    <p>This is the page the user is taken to after a successful login</p>
-    <br><br><br>
-    <p>Here, you can view all your lists</p>
+    <br><br>
+    <p><i>Here, you can view all your lists, create new lists, and delete existing ones</i></p>
+    <br><br>
 
     <!-- <ul>
         {% for elem in data %}
@@ -19,21 +19,31 @@
         {% endfor %}
     </ul>     -->
 
-    <h2 style="color: whitesmoke;">Current Lists</h2>
-    <form action="/display_list" style="color: whitesmoke; font-size: large;" method="post">
+    <h2 style="color: greenyellow;">Current Lists</h2>
+    <form action="/display_list" style="color: whitesmoke; font-size: medium;" method="post">
         {% for elem in data['list_names'] %}
         <input type="radio" id="{{ elem }}" name="list_name" value="{{elem}}">
         <label for="{{ elem }}">{{elem}}</label><br><br>
         {% endfor %}
         <br>
+        
+        {% for msg in get_flashed_messages() %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ msg }}            
+        </div>
+        {% endfor %}
+        
         <button class="btn-view-list" name="action" type="submit" value="View">View List</button>
         <button class="btn-view-list" name="action" type="submit" value="Delete">Delete List</button>
     </form>
 
+
+
     <br><br><br>
 
     <div class="add-list-container">
-        <h2>
+        <h2 style="color: greenyellow;">
             Add New List
         </h2>
         <form action="/create_new_list", method="post">

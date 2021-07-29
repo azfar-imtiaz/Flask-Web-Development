@@ -230,7 +230,7 @@ img.signup-avatar {
     text-align: center;
     border-radius: 6px;
     border: none;
-    background-color: red;
+    background-color: #f44336;
     color: white;
     padding: 20px;
     width: 200px;
@@ -248,6 +248,34 @@ img.signup-avatar {
     position: absolute;
     top: 100px;
     left: 1500px;
+}
+
+/* The alert message box */
+.alert {
+    padding: 12px;
+    width: 30em;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 7px;
+    border-radius: 6px;
+    opacity: 0.85;
+}
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
 }
 
 /* View_list CSS */

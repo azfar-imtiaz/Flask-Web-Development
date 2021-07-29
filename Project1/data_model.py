@@ -80,11 +80,16 @@ class DataModel:
     #####################################################
 
     def create_new_list(self, user_id, list_name):
-        query = '''
-            INSERT INTO Lists (UserID, ListName)
-            VALUES ('{}', '{}');
-        '''.format(user_id, list_name)
-        self.insert_data(query)
+        existing_lists_for_user = self.get_all_list_names(user_id)
+        existing_lists_for_user = [a[0].lower() for a in existing_lists_for_user]
+        if list_name.lower() not in existing_lists_for_user:
+            query = '''
+                INSERT INTO Lists (UserID, ListName)
+                VALUES ('{}', '{}');
+            '''.format(user_id, list_name)
+            self.insert_data(query)
+            return True
+        return False
 
     def edit_list_name(self, list_id, updated_list_name):
         query = '''
@@ -110,17 +115,23 @@ class DataModel:
         result = self.retrieve_data_single(query)
         return result
 
-    def get_list_id(self, list_name):
+    def get_list_id(self, user_id, list_name):
         query = '''
             SELECT ListID FROM Lists
-            WHERE ListName = '{}'
-        '''.format(list_name)
+            WHERE UserID = '{}' AND ListName = '{}'
+        '''.format(user_id, list_name)
         result = self.retrieve_data_single(query)
         return result
 
-    def delete_list(self, user_id, list_name):
-        # TODO: Here, we should first delete all tasks in the Tasks table pertaining
-        #   to this ListID
+    def delete_list(self, user_id, list_id, list_name):
+        # We first delete all tasks in the Tasks table pertaining to this ListID
+        query = '''
+            DELETE FROM Tasks
+            WHERE ListID = '{}';
+        '''.format(list_id)
+        self.insert_data(query)
+
+        # Then we delete the list itself
         query = '''
             DELETE FROM Lists
             WHERE UserID = '{}' AND ListName = '{}';
@@ -147,15 +158,8 @@ class DataModel:
         '''.format(updated_task_name, list_id, task_id)
         self.insert_data(query)
 
-    # def update_task_status(self, list_id, task_id, updated_task_status):
     def update_task_status(self, task_ids, updated_task_status):
         # NOTE: Here, task_ids is a tuple
-        # NOTE: ListID might not be required here
-        # query = '''
-        #     UPDATE Tasks
-        #     SET Status = '{}'
-        #     WHERE list_id = '{}' and task_id = '{}';
-        # '''.format(updated_task_status, list_id, task_id)
         query = '''
             UPDATE Tasks
             SET Status = {}

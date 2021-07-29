@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file, session, g
+from flask import Flask, request, render_template, send_file, session, g, flash
 from flask.helpers import url_for
 from werkzeug.utils import redirect
 from data_model import DataModel
@@ -83,14 +83,18 @@ def login():
 
 @app.route('/display_list', methods=['POST'])
 def display_list():
-    list_name = request.form['list_name']
-    list_id = model.get_list_id(list_name)
-    if list_id is not None:
-        if request.form['action'] == 'View':
-            list_id = list_id[0]
-            return redirect(url_for('display_list_with_id', list_id=list_id, list_name=list_name))        
-        elif request.form['action'] == 'Delete':
-            return redirect(url_for('delete_list', list_name=list_name))
+    try:
+        list_name = request.form['list_name']
+        list_id = model.get_list_id(g.user_id, list_name)
+        if list_id is not None:
+            if request.form['action'] == 'View':
+                list_id = list_id[0]
+                return redirect(url_for('display_list_with_id', list_id=list_id, list_name=list_name))        
+            elif request.form['action'] == 'Delete':
+                return redirect(url_for('delete_list', list_name=list_name))
+    except KeyError:
+        flash("Please select a list")
+        return redirect(url_for('home'))
 
 @app.route('/display_list/<int:list_id>/<string:list_name>')
 def display_list_with_id(list_id, list_name):
@@ -135,12 +139,15 @@ def sign_up():
 @app.route('/create_new_list', methods=['POST'])
 def create_new_list():
     list_name = request.form['list_name']
-    model.create_new_list(g.user_id, list_name)
+    status = model.create_new_list(g.user_id, list_name)
+    if status is False:
+        flash("This list already exists!")
     return redirect(url_for('home'))
 
 @app.route('/delete_list/<string:list_name>')
 def delete_list(list_name):
-    model.delete_list(g.user_id, list_name)
+    list_id = model.get_list_id(g.user_id, list_name)
+    model.delete_list(g.user_id, list_id, list_name)
     return redirect(url_for('home'))
 
 @app.route('/edit_list', methods=['POST'])
