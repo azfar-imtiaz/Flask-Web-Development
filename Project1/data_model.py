@@ -143,11 +143,29 @@ class DataModel:
     #####################################################
 
     def create_new_task(self, list_id, task_name, status):
-        query = '''
-            INSERT INTO Tasks (ListID, TaskName, Status)
-            VALUES ('{}', '{}', '{}');
-        '''.format(list_id, task_name, status)
-        self.insert_data(query)
+        tasks_in_list = self.get_all_tasks(list_id)
+        task_names_in_list = [a[1].lower() for a in tasks_in_list]
+        # if task doesn't exist in this list, add it
+        if task_name.lower() not in task_names_in_list:
+            query = '''
+                INSERT INTO Tasks (ListID, TaskName, Status)
+                VALUES ('{}', '{}', '{}');
+            '''.format(list_id, task_name, status)
+            self.insert_data(query)
+            return True
+        # if task already exists...
+        else:
+            existing_task = [a for a in tasks_in_list if task_name.lower() == a[1].lower()]
+            existing_task_id = existing_task[0][0]
+            existing_task_status = existing_task[0][2]
+            # if task has been marked as complete, change its status to incomplete
+            if existing_task_status == 1:
+                existing_task_id = tuple([str(existing_task_id)])
+                self.update_task_status(existing_task_id, updated_task_status=0)
+                return True
+            # if task is already incomplete, return False, which results in "Task already exists" message
+            else:
+                return False
 
     def update_task_name(self, list_id, task_id, updated_task_name):
         # NOTE: ListID might not be required here
@@ -156,6 +174,7 @@ class DataModel:
             SET TaskName = '{}'
             WHERE list_id = '{}' and task_id = '{}';
         '''.format(updated_task_name, list_id, task_id)
+        print(query)
         self.insert_data(query)
 
     def update_task_status(self, task_ids, updated_task_status):
@@ -165,6 +184,7 @@ class DataModel:
             SET Status = {}
             WHERE TaskID IN ({});
         '''.format(updated_task_status, ','.join(task_ids))
+        print(query)
         self.insert_data(query)
 
     def delete_all_tasks(self, list_id):

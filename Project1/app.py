@@ -120,7 +120,9 @@ def check_off_items():
 @app.route('/add_new_task', methods=['POST'])
 def add_new_task():
     task_name = request.form['task_name']
-    model.create_new_task(session['current_list_id'], task_name, status=0)
+    status = model.create_new_task(session['current_list_id'], task_name, status=0)
+    if status is False:
+        flash("This task already exists!")
     return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name = session['current_list_name']))
 
 @app.route('/sign_up', methods=['POST'])

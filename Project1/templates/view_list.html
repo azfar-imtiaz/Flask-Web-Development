@@ -9,7 +9,7 @@
     <h2>{{ list_tasks_dict['list_name'] }}</h2>
     <!-- <p style="color: whitesmoke;">Here you will also have the options to rename or delete the list, as well as add/remove/check off a task</p> -->
 
-    <h3 style="color: whitesmoke;">
+    <h3 style="color: greenyellow;">
         Incomplete Tasks:
     </h3>
     <form action="/check_off_items" method="post">
@@ -20,11 +20,11 @@
         <br><br>
         {% endif %}
         {% endfor %}
-        <button type="submit" name="action" value="Complete">Mark Selected Tasks as Done</button>
-        <button type="submit" name="action" value="Delete">Delete Selected Tasks</button>
+        <button type="submit" name="action" value="Complete" class="btn-login">Mark Selected Tasks as Done</button>
+        <button type="submit" name="action" value="Delete" class="btn-login">Delete Selected Tasks</button>
     </form>
 
-    <h3 style="color: whitesmoke;">
+    <h3 style="color: greenyellow;">
         Completed Tasks:
     </h3>
     <!-- <ul> -->
@@ -39,19 +39,28 @@
     <!-- </ul> -->
 
     <div class="add_task_container">
-        <h2>
+        <h2 style="color: greenyellow;">
             Add New Task
         </h2>
         <form action="/add_new_task", method="post">
             <label for="task_name" style="color: whitesmoke;"><b>Task name:</b></label><br>
             <input type="text" placeholder="Enter task name" name="task_name" required><br>
-            
+
             <button class="btn-add-task" type="submit">Add Task</button>
+
+            {% for msg in get_flashed_messages() %}
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ msg }}            
+            </div>
+            {% endfor %}            
+            
         </form>
+        
     </div>
 
     <div class="edit_list_name_container">
-        <h2>
+        <h2 style="color: greenyellow;">
             Edit List Name
         </h2>
         <form action="/edit_list", method="post">
