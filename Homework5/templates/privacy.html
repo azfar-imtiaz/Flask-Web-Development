@@ -1,0 +1,27 @@
+{% extends "main_structure.html" %}
+
+{% block head %}
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="static/css/signup-signin.css">
+    <title>Privacy</title>
+{% endblock %}
+
+
+{% block body %}
+    <body class="terms_of_use_body">
+
+        <h2>Privacy Policy</h2>
+
+        <div class="terms_of_use_div" align="left">
+            <p>
+                Please click the following button to download a document detailing our Privacy Policy.
+            </p>
+        </div>
+            
+        <a href="/download_privacy_policy" target="blank">
+        <!-- <button class="btn-download-terms" style="vertical-align:middle"><span>Download </span></button> -->
+        <button class="form-submit" ><span>Download </span></button>
+        </a>
+
+    </body>
+{% endblock %}

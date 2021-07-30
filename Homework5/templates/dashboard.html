@@ -1,0 +1,63 @@
+{% extends "main_structure.html" %}
+
+{% block head %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block body %}
+<body class="dashboard_body">
+    <a href="/logout">
+        <button class="btn-logout">
+            <span>Logout</span>
+        </button>
+    </a>
+    <h2>Welcome, {{ data['username'] }}!</h2>
+    <br><br>
+    <p><i>Here, you can view all your lists, create new lists, and delete existing ones</i></p>
+    <br><br>
+
+    <div class="view-lists-container">
+        <h2 style="color: greenyellow;">Current Lists</h2>
+        <form action="/display_list" method="post">
+            {% for elem in data['list_names'] %}
+            <input type="radio" id="{{ elem }}" name="list_name" value="{{elem}}">
+            <label for="{{ elem }}">{{elem}}</label><br><br>
+            {% endfor %}
+            <br>
+            
+            <button class="btn-view-list" name="action" type="submit" value="View">View List</button>
+            <button class="btn-view-list" name="action" type="submit" value="Delete">Delete List</button>
+
+            {% for msg in get_flashed_messages(category_filter=['view-list-error']) %}
+            <div class="alert alert-failure">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ msg }}
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+
+    <br><br><br>
+
+    <div class="add-list-container">
+        <h2 style="color: greenyellow;">
+            Add New List
+        </h2>
+        <form action="/create_new_list", method="post">
+            <label for="List name" style="color: whitesmoke;"><b>List name:</b></label><br>
+            <input type="text" placeholder="Enter list name" name="list_name" required><br>
+            
+            <button class="btn-view-list" type="submit">Add Task</button>
+
+            {% for msg in get_flashed_messages(category_filter=['add-list-error']) %}
+            <div class="alert alert-failure">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ msg }}
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    
+</body>
+    
+{% endblock %}

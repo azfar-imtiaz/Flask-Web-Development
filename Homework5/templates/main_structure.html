@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <!-- Font Icon -->
+        <link rel="stylesheet" href="static/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+        
+        <!-- <link rel="stylesheet" href="static/css/style.css"> -->
+        
+        {% block head %}
+        <!-- Main CSS -->
+        <link rel="stylesheet" href="static/css/signup-signin.css">
+
+        <title>ToDo List</title>
+        {% endblock head %}
+    </head>
+
+    {% block body %}
+    <body class="main_body">
+
+        <div class="main">
+            <section class="sign-in">
+                <div class="container">
+                    <div class="signin-content">
+                        <div class="signin-image">
+                            <figure><img src="static/img/signin-image.jpg" alt="sing up image"></figure>
+                            <a href="/sign_up_view" class="signup-image-link">Create an account</a>
+                        </div>
+
+                        <div class="signin-form">
+                            <h2 class="form-title">Sign in!</h2>
+                            <form action="/login" method="POST" class="register-form" id="login-form">
+                                <div class="form-group">
+                                    <label for="user_email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                    <input type="text" name="user_email" id="your_name" placeholder="Your Email"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                    <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                </div> -->
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                </div>
+                            </form>
+                            <!-- <div class="social-login">
+                                <span class="social-label">Or login with</span>
+                                <ul class="socials">
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+
+        <!-- <p style="color: greenyellow; font-size: 48px; position: absolute; left: 105px; top: 10px;"><b>To-Do List!</b></p>
+
+        <div class="signup-login-forms">
+
+            <div class="login-form-img-container">
+                <form action="/login" method="post">
+                    <div class="login-img-container">
+                        <img src="../static/img/login_avatar.png" alt="Avatar" class="login-avatar">
+                    </div>
+
+                    <div class="login-container">
+                        <h2 style="color: #04AA6D;"><b>Login</b></h2>
+                        <label for="user_email"><b>Email</b></label><br>
+                        <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" placeholder="Enter Password" name="password" required><br>
+
+                        <button class="btn-login" type="submit">Login</button>
+
+                        {% for msg in get_flashed_messages(category_filter=['login-error']) %}
+                        <div class="alert alert-failure">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+
+            <div class="vertical-line"></div>
+
+            <div class="signup-form-img-container">
+                <form action="/sign_up" method="post">
+                    <div class="signup-img-container">
+                        <img src="../static/img/signup_avatar.png" alt="Avatar" class="signup-avatar">
+                    </div>
+
+                    <div class="signup-container">
+                        <h2 style="color: #04AA6D;"><b>Sign up!</b></h2>
+                        <label for="user_email"><b>Email</b></label><br>
+                        <input type="text" placeholder="Enter Email" name="user_email" required><br><br>
+
+                        <label for="username"><b>Username</b></label><br>
+                        <input type="text" placeholder="Enter Username" name="username" required><br><br>
+
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" placeholder="Enter Password" name="password" required><br>
+
+                        <button class="btn-login" type="submit">Sign up!</button>
+
+                        {% for category, msg in get_flashed_messages(with_categories=true) %}
+                        <div class="alert alert-{{ category }}">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div> -->
+
+        
+        <div class="position-center">
+            <a href="/terms_of_use">
+                <!-- <button class="btn-go-to-terms-of-use"> -->
+                <button class="form-submit">
+                    <span>Terms of Use</span>
+                </button>
+            </a>
+        
+            <a href="/about">
+                <!-- <button class="btn-go-to-about-us"> -->
+                <button class="form-submit">
+                    <span>About Us</span>
+                </button>
+            </a>
+        
+            <a href="/privacy">
+                <!-- <button class="btn-go-to-privacy-policy"> -->
+                <button class="form-submit">
+                    <span>Privacy Policy</span>
+                </button>
+            </a>
+        </div>
+        </div>
+        
+    </body>
+    {% endblock %}
+    
+</html>
