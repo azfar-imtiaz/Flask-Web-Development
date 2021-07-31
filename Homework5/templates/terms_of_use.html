@@ -10,18 +10,20 @@
 {% block body %}
     <body class="terms_of_use_body">
 
-        <h2>Terms and Conditions of Use</h2>
+        <div class="position-center">
+            <h2>Terms and Conditions of Use</h2>
 
-        <div class="terms_of_use_div" align="left">
-            <p>
-                Please click the following button to download a document detailing our Terms and Conditions of Use.
-            </p>
+            <div class="terms_of_use_div" align="left">
+                <p>
+                    Please click the following button to download a document detailing our Terms and Conditions of Use.
+                </p>
+            </div>
+                
+            <a href="/download_terms_of_use" target="blank">
+            <!-- <button class="btn-download-terms" style="vertical-align:middle"><span>Download </span></button> -->
+            <button class="form-submit" ><span>Download </span></button>
+            </a>
         </div>
-            
-        <a href="/download_terms_of_use" target="blank">
-        <!-- <button class="btn-download-terms" style="vertical-align:middle"><span>Download </span></button> -->
-        <button class="form-submit" ><span>Download </span></button>
-        </a>
 
     </body>
 {% endblock %}

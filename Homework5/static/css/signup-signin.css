@@ -200,7 +200,7 @@ body {
   font-weight: 400;
   font-family: Poppins; }
 
-.container {
+.container-signup-signin {
   width: 900px;
   background: #fff;
   margin: 0 auto;
@@ -241,7 +241,7 @@ body {
 
 .position-center {
   position: absolute;
-  top: 85%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -592,5 +592,7 @@ label.valid {
 /*# sourceMappingURL=style.css.map */
 
 .bottom-buttons {
-  margin: 0 auto; 
+  /* margin: 0 auto;  */
+  padding-left: 33%;
+  padding-top: 5%;
 }
