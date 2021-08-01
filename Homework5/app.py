@@ -153,9 +153,12 @@ def sign_up():
 @app.route('/create_new_list', methods=['POST'])
 def create_new_list():
     list_name = request.form['list_name']
-    status = model.create_new_list(g.user_id, list_name)
-    if status is False:
-        flash("This list already exists!", category='add-list-error')
+    if len(list_name.strip()) <= 0:
+        flash("Please enter a proper list name", category='add-list-error')
+    else:
+        status = model.create_new_list(g.user_id, list_name)
+        if status is False:
+            flash("This list already exists!", category='add-list-error')
     return redirect(url_for('home'))
 
 @app.route('/delete_list/<string:list_name>')
