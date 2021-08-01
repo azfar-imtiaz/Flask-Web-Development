@@ -63,30 +63,60 @@ h1, h2 {
     margin-left: 1%;
 }
 
+.tasks-view-container {
+    /* margin-top: 3%; */
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
 .lists-view {
     margin-top: 1em;
     margin-left: 1em;
 }
 
-.alert-list-task {
+.alert-list {
     width: 30%;
     margin: 1% auto;
 }
 
+.alert-task {
+    width: 70%;
+    margin-top: 1%;
+}
+
 .add-list-container {
-    width: 20%;
     /* margin-top: -16.3em; */
     margin-top: 3%;
     margin-left: 1%;
 }
 
-.add-list-form {
-    margin-left: 1em;
+.add-task-container {
+    margin-top: 3%;
 }
 
-.btn-logout {
-    /* position: absolute; */
-    margin-left: 93%;
+.new-list {
+    width: 20%;
+}
+
+.new-task {
+    width: 50%;
+}
+
+.btn-top-left {
     margin-bottom: 1%;
     margin-top: 1%;
 }
+
+.btn-logout {
+    padding-right: 99%;
+}
+
+.btn-home-logout {
+    padding-right: 99%;
+}
+
+.task-complete {
+    color: #777;
+    text-decoration: line-through;
+}
+

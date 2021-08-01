@@ -129,9 +129,12 @@ def uncheck_items():
 @app.route('/add_new_task', methods=['POST'])
 def add_new_task():
     task_name = request.form['task_name']
-    status = model.create_new_task(session['current_list_id'], task_name, status=0)
-    if status is False:
-        flash("This task already exists!")
+    if len(task_name.strip()) <= 0:
+        flash("Please enter a proper task name", category='add-task-error')
+    else:
+        status = model.create_new_task(session['current_list_id'], task_name, status=0)
+        if status is False:
+            flash("This task already exists!")
     return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name = session['current_list_name']))
 
 @app.route('/sign_up_view', methods=['GET', 'POST'])
@@ -170,10 +173,13 @@ def delete_list(list_name):
 @app.route('/edit_list', methods=['POST'])
 def edit_list():
     updated_list_name = request.form['updated_list_name']
-    session['current_list_name'] = updated_list_name
-    model.edit_list_name(
-        session['current_list_id'], updated_list_name
-    )
+    if len(updated_list_name.strip()) <= 0:
+        flash("Please enter a proper list name", category='edit-list-error')
+    else:
+        session['current_list_name'] = updated_list_name
+        model.edit_list_name(
+            session['current_list_id'], updated_list_name
+        )
     return redirect(url_for('display_list_with_id', list_id=session['current_list_id'], list_name=session['current_list_name']))
 
 @app.route('/logout', methods=['GET', 'POST'])

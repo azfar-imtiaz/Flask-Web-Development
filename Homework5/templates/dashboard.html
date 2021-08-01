@@ -14,7 +14,7 @@
 {% block body %}
 <body>
     
-    <div class="container btn-logout">
+    <div class="container btn-top-left btn-logout">
         <a href="/logout">
             <button class="btn btn-danger btn-lg">
                 <span>Logout</span>
@@ -58,9 +58,9 @@
             <div class="add-list-container">
                 <h2>Add new list</h2>
                 <form action="/create_new_list" method="post">
-                    <div class="mb-3 add-list-form">
+                    <div class="mb-3">
                         <label for="list_name" class="form-label">Enter list name:</label>
-                        <input type="text" class="form-control" id="list_name" name="list_name" required>
+                        <input type="text" class="form-control new-list" id="list_name" name="list_name" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -70,7 +70,7 @@
     </div>
 
     {% for msg in get_flashed_messages(category_filter=['view-list-error', 'add-list-error']) %}
-    <div class="alert alert-warning alert-dismissible fade show alert-list-task" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show alert-list" role="alert">
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         <strong>Holy guacamole!</strong> {{msg}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';"></button>
