@@ -73,18 +73,20 @@ def admin_all_users_view(page_num):
             'page_num': page_num,
             'users': users
         }
-        for elem in data['users']:
-            print(', '.join([elem[3], elem[1], elem[4]]))
         return render_template('admin_all_users_view.html', data=data)
 
 @admin_page.route('/admin/users/<int:user_id>', methods=['POST'])
 def admin_user_view(user_id):
-    return str(user_id)
-    return render_template('admin_user_view.html')
+    user_info = model.get_user(user_id)
+    user_lists_names = model.get_all_list_names(user_id)
+    return render_template('admin_user_view.html', data={
+        'user_info': user_info,
+        'list_names': user_lists_names
+    })
 
 @admin_page.route('/admin/users/delete_user', methods=['POST'])
 def admin_delete_user():
     user_id = request.form['user_id']
-    # model.delete_user(user_id)
-    return redirect(url_for('admin_all_users_view'))
+    model.delete_user(user_id)
+    return redirect(url_for('.admin_all_users_view'))
 

@@ -13,7 +13,7 @@ def filter_users(all_users):
         time_diff = current_time - insertion_time
         time_diff_total_seconds = time_diff.total_seconds()
         # Here, 3600 is the total number of seconds in an hour
-        diff_in_hours = divmod(time_diff_total_seconds, 3600)
+        diff_in_hours = divmod(time_diff_total_seconds, 3600)[0]
         if diff_in_hours <= 24:
             filtered_users.append(user)
     return filtered_users

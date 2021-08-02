@@ -39,11 +39,21 @@ class DataModel:
         '''.format(email, password, username)
         self.insert_data(query)
 
+    # this function selects the user by email
     def get_user(self, email):
         query = '''
             SELECT * FROM Users
             WHERE Email = '{}';
         '''.format(email)
+        result = self.retrieve_data_single(query)
+        return result
+
+    # this function selects the user by user_id
+    def get_user(self, user_id):
+        query = '''
+            SELECT * FROM Users
+            WHERE UserID = '{}';
+        '''.format(user_id)
         result = self.retrieve_data_single(query)
         return result
 
@@ -75,6 +85,25 @@ class DataModel:
         '''.format(user_email)
         result = self.retrieve_data_single(query)
         return result[0]
+
+    def delete_user(self, user_id):
+        # First, we select and delete all lists created by this user
+        query = '''
+            SELECT ListID, ListName FROM Lists
+            WHERE UserID = '{}';
+        '''.format(user_id)
+        result = self.retrieve_data_multiple(query)
+        for row in result:
+            list_id = row[0]
+            list_name = row[1]
+            self.delete_list(user_id, list_id, list_name)
+        
+        # Now, we delete the user itself
+        query = '''
+            DELETE FROM Users
+            WHERE UserID = '{}';
+        '''.format(user_id)
+        self.insert_data(query)
 
     #####################################################
     ###        CRUD operations for Lists table        ###
