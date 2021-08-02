@@ -19,6 +19,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="/static/css/normalize.css">
   <link rel="stylesheet" href="/static/css/skeleton.css">
+  <link rel="stylesheet" href="/static/css/admin.css"
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -26,6 +27,9 @@
 
 </head>
 <body>
+    <form action="/admin/dashboard" method="post">
+        <button class="button-primary" name="action" value="home" type="submit">Home</button>
+    </form>
     <div class="container">
         <h2>Users</h2>
         <h5><i>Sorted in descending order</i></h5>
@@ -45,7 +49,7 @@
                     <td>{{ elem[1] }}</td>
                     <td>{{ elem[4] }}</td>
                     <td>
-                        <form action="/admin/users/{{elem[0]}}" method="post" style="margin-bottom: 5%; margin-top: 10%;">
+                        <form action="/admin/users/{{elem[0]}}" method="post" class="btn-view-user">
                             <!-- <input type="submit" class="button-primary" value="{{ elem[0] }}"> -->
                             <button type="submit" class="button-primary" value="{{elem[0]}}">View</button>
                         </form>
@@ -54,6 +58,34 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <form action="/admin/users/next_page" method="post">
+            {% if data['page_num'] > 1 %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] - 1 }}">
+                    Prev
+                </button>
+            {% else %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] }}">
+                    Prev
+                </button>
+            {% endif %}
+
+            <button 
+                type="submit" 
+                class="button-primary btn-next-page-users" 
+                name="page_num" 
+                value="{{ data['page_num'] + 1 }}">
+                Next
+            </button>
+        </form>
     </div>
 </body>
 </html>
