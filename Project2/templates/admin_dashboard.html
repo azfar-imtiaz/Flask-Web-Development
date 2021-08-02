@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Admin Dashboard</title>
+  
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+
+</head>
+<body>
+    <div class="container">
+        <form action="/admin/admin_options" method="post">
+            <label for="user_signup">
+                <input type="radio" name="option" id="user_signup" value="user_signup" />
+                <span>Total user signups</span>
+            </label>
+
+            <label for="user_signup_24">
+                <input type="radio" name="option" id="user_signup_24" value="user_signup_24" />
+                <span>Total user signups in last 24 hours</span>
+            </label>
+
+            <label for="lists_created">
+                <input type="radio" name="option" id="lists_created" value="lists_created" />
+                <span>Total lists created</span>
+            </label>
+
+            <label for="lists_created_24">
+                <input type="radio" name="option" id="lists_created_24" value="lists_created_24" />
+                <span>Total lists created in last 24 hours</span>
+            </label>
+
+            <button type="submit" class="button-primary">Select</button>
+        </form>
+    </div>
+</body>
+</html>
