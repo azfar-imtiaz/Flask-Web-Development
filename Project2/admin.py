@@ -34,15 +34,18 @@ def admin_dashboard():
 
 @admin_page.route('/admin/admin_options', methods=['POST'])
 def admin_dashboard_option_selection():
-    selected_option = request.form['option']
-    if selected_option == 'user_signup':
-        session['limit_users'] = False
-        return redirect(url_for('.admin_all_users_view', page_num=1))
-    elif selected_option == 'user_signup_24':
-        session['limit_users'] = True
-        return redirect(url_for('.admin_all_users_view', page_num=1))
-    elif selected_option.startswith('lists'):
-        return "Not implemented yet"
+    try:
+        selected_option = request.form['option']
+        if selected_option == 'user_signup':
+            session['limit_users'] = False
+            return redirect(url_for('.admin_all_users_view', page_num=1))
+        elif selected_option == 'user_signup_24':
+            session['limit_users'] = True
+            return redirect(url_for('.admin_all_users_view', page_num=1))
+        elif selected_option.startswith('lists'):
+            return "Not implemented yet"
+    except KeyError:
+        return redirect(url_for('.admin_dashboard'))
 
 @admin_page.route('/admin/users/<int:page_num>')
 def admin_all_users_view(page_num):
