@@ -11,14 +11,19 @@ model = DataModel(db_name='../ToDoList.db')
 
 @admin_page.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return render_template('admin_login.html')
+    if 'admin' in session:
+        return redirect(url_for('.admin_dashboard'))
+    else:
+        return render_template('admin_login.html')
 
 @admin_page.route('/admin_login', methods=['POST'])
 def admin_login():
+    session.pop('admin', None)
     username = request.form['username']
     password = request.form['password']
     admin_verification_status = model.verify_admin(username, password)
     if admin_verification_status:
+        session['admin'] = True
         return render_template('admin_dashboard.html')
     else:
         flash("Incorrect username or password!", category='login-error')
@@ -30,6 +35,8 @@ def admin_dashboard():
         action = request.form['action']
         if action == 'all_users':
             return redirect(url_for('.admin_all_users_view', page_num=1))
+        elif action == 'logout':
+            return redirect(url_for('.admin_logout'))
     return render_template('admin_dashboard.html')
 
 @admin_page.route('/admin/admin_options', methods=['POST'])
@@ -115,3 +122,7 @@ def admin_delete_user():
     model.delete_user(user_id)
     return redirect(url_for('.admin_all_users_view', page_num=1))
 
+@admin_page.route('/admin/logout', methods=['GET'])
+def admin_logout():
+    session.pop('admin', None)
+    return redirect(url_for('.admin'))
