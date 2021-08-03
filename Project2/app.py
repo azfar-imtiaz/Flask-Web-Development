@@ -171,7 +171,7 @@ def create_new_list():
 @app.route('/delete_list/<string:list_name>')
 def delete_list(list_name):
     list_id = model.get_list_id(g.user_id, list_name)
-    model.delete_list(g.user_id, list_id, list_name)
+    model.delete_list(list_id, g.user_id, list_name)
     return redirect(url_for('home'))
 
 @app.route('/edit_list', methods=['POST'])

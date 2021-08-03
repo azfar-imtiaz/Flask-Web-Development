@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Admin User View</title>
+  <title>Admin Dashboard</title>
   
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -30,37 +30,61 @@
     <form action="/admin/dashboard" method="post">
         <button class="button-primary" name="action" value="home" type="submit">Home</button>
         <button class="button-primary" name="action" value="logout" type="submit">Logout</button>
-        <button class="button-primary" name="action" value="all_users" type="submit">All users</button>        
     </form>
     <div class="container">
-        <h2 class="heading">User Information</h2>
+        <h2 class="heading">Lists</h2>
+        <h5><i>Sorted in descending order</i></h5>
         <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Listname</th>
+                    <th>User ID</th>
+                    <th>List created on</th>
+                    <th>View</th>
+                </tr>
+            </thead>
             <tbody>
+                {% for elem in data['lists'] %}
                 <tr>
-                    <td><b>Username</b></td>
-                    <td>{{ data['user_info'][3] }}</td>
-                </tr>
-                <tr>
-                    <td><b>Email</b></td>
-                    <td>{{ data['user_info'][1] }}</td>
-                </tr>
-                <tr>
-                    <td><b>Date created on</b></td>
-                    <td>{{ data['user_info'][4] }}</td>
-                </tr>
-                <tr>
-                    <td><b>Lists created by user</b></td>
-                    <td></td>
-                </tr>
-                {% for list_name in data['list_names'] %}
-                <tr>
-                    <td>  -  {{ list_name[0] }}</td>                    
+                    <td>{{ elem[2] }}</td>
+                    <td>{{ elem[1] }}</td>
+                    <td>{{ elem[3] }}</td>
+                    <td>
+                        <form action="/admin/lists/{{elem[0]}}" method="post" class="btn-view-user">
+                            <button type="submit" class="button-primary" value="{{elem[0]}}">View</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/admin/users/delete_user" method="post">
-            <button type="submit" class="button-primary" name="user_id" value="{{ data['user_info'][0] }}">Delete User</button>
+
+        <form action="/admin/lists/next_page" method="post">
+            {% if data['page_num'] > 1 %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] - 1 }}">
+                    Prev
+                </button>
+            {% else %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] }}">
+                    Prev
+                </button>
+            {% endif %}
+
+            <button 
+                type="submit" 
+                class="button-primary btn-next-page-users" 
+                name="page_num" 
+                value="{{ data['page_num'] + 1 }}">
+                Next
+            </button>
         </form>
     </div>
 </body>

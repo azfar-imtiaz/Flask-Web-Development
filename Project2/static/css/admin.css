@@ -6,3 +6,26 @@
     margin-bottom: 5%; 
     margin-top: 10%;
 }
+
+.container-centered {
+    padding-top: 12%; 
+    margin-left: 42%
+}
+
+.heading {
+    font-weight: bold;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.dashboard-options-form {
+    padding-top: 12%;
+    margin-left: 25%;
+}
+
+.dashboard-options-text {
+    font-size: large;
+    margin-bottom: 5%;    
+}

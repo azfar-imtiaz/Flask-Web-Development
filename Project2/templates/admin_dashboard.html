@@ -19,6 +19,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="/static/css/normalize.css">
   <link rel="stylesheet" href="/static/css/skeleton.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -30,24 +31,25 @@
         <button class="button-primary" type="submit">Logout</button>
     </form>
     <div class="container">
-        <h2>Admin Dashboard</h2>
-        <form action="/admin/admin_options" method="post">
-            <label for="user_signup">
+        <h2 class="heading">Admin Dashboard</h2>
+        <hr>
+        <form action="/admin/admin_options" class="dashboard-options-form" method="post">
+            <label for="user_signup" class="dashboard-options-text">
                 <input type="radio" name="option" id="user_signup" value="user_signup" />
                 <span>Total user signups</span>
             </label>
 
-            <label for="user_signup_24">
+            <label for="user_signup_24" class="dashboard-options-text">
                 <input type="radio" name="option" id="user_signup_24" value="user_signup_24" />
                 <span>Total user signups in last 24 hours</span>
             </label>
 
-            <label for="lists_created">
+            <label for="lists_created" class="dashboard-options-text">
                 <input type="radio" name="option" id="lists_created" value="lists_created" />
                 <span>Total lists created</span>
             </label>
 
-            <label for="lists_created_24">
+            <label for="lists_created_24" class="dashboard-options-text">
                 <input type="radio" name="option" id="lists_created_24" value="lists_created_24" />
                 <span>Total lists created in last 24 hours</span>
             </label>

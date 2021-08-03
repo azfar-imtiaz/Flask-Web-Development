@@ -1,0 +1,4 @@
+PATH_TO_DB = '../ToDoList.db'
+ROWS_TO_DISPLAY_PER_PAGE = 3
+# this is in hours
+TIME_LIMIT_SINCE_CREATION = 24

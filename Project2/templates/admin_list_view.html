@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Admin User View</title>
+  <title>Admin List View</title>
   
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -30,37 +30,47 @@
     <form action="/admin/dashboard" method="post">
         <button class="button-primary" name="action" value="home" type="submit">Home</button>
         <button class="button-primary" name="action" value="logout" type="submit">Logout</button>
-        <button class="button-primary" name="action" value="all_users" type="submit">All users</button>        
+        <button class="button-primary" name="action" value="all_lists" type="submit">All lists</button>        
     </form>
     <div class="container">
-        <h2 class="heading">User Information</h2>
+        <h2 class="heading">List Information</h2>
         <table class="u-full-width">
             <tbody>
                 <tr>
-                    <td><b>Username</b></td>
-                    <td>{{ data['user_info'][3] }}</td>
+                    <td><b>Listname</b></td>
+                    <td>{{ data['list_info'][2] }}</td>
                 </tr>
                 <tr>
-                    <td><b>Email</b></td>
-                    <td>{{ data['user_info'][1] }}</td>
+                    <td><b>Username</b></td>
+                    <td>{{ data['list_info'][1] }}</td>
                 </tr>
                 <tr>
                     <td><b>Date created on</b></td>
-                    <td>{{ data['user_info'][4] }}</td>
+                    <td>{{ data['list_info'][3] }}</td>
                 </tr>
                 <tr>
-                    <td><b>Lists created by user</b></td>
+                    <td><b>Incomplete tasks</b></td>
                     <td></td>
                 </tr>
-                {% for list_name in data['list_names'] %}
+                {% for task_name in data['task_names_incomplete'] %}
                 <tr>
-                    <td>  -  {{ list_name[0] }}</td>                    
+                    <td>  -  {{ task_name[0] }}</td>
+                </tr>
+                {% endfor %}
+                
+                <tr>
+                    <td><b>Complete tasks</b></td>
+                    <td></td>
+                </tr>
+                {% for task_name in data['task_names_complete'] %}
+                <tr>
+                    <td>  -  {{ task_name[0] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/admin/users/delete_user" method="post">
-            <button type="submit" class="button-primary" name="user_id" value="{{ data['user_info'][0] }}">Delete User</button>
+        <form action="/admin/lists/delete_list" method="post">
+            <button type="submit" class="button-primary" name="list_id" value="{{ data['list_info'][0] }}">Delete List</button>
         </form>
     </div>
 </body>
