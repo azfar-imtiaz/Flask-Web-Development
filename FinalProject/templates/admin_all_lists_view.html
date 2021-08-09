@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Admin Dashboard</title>
+  
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/skeleton.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+
+</head>
+<body>
+    <form action="/admin/dashboard" method="post">
+        <button class="button-primary" name="action" value="home" type="submit">Home</button>
+        <button class="button-primary" name="action" value="logout" type="submit">Logout</button>
+    </form>
+    <div class="container">
+        <h2 class="heading">Lists</h2>
+        <h5><i>Sorted in descending order</i></h5>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Listname</th>
+                    <th>User ID</th>
+                    <th>List created on</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elem in data['lists'] %}
+                <tr>
+                    <td>{{ elem[2] }}</td>
+                    <td>{{ elem[1] }}</td>
+                    <td>{{ elem[3] }}</td>
+                    <td>
+                        <form action="/admin/lists/{{elem[0]}}" method="post" class="btn-view-user">
+                            <button type="submit" class="button-primary" value="{{elem[0]}}">View</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="/admin/lists/next_page" method="post">
+            {% if data['page_num'] > 1 %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] - 1 }}">
+                    Prev
+                </button>
+            {% else %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] }}">
+                    Prev
+                </button>
+            {% endif %}
+
+            <button 
+                type="submit" 
+                class="button-primary btn-next-page-users" 
+                name="page_num" 
+                value="{{ data['page_num'] + 1 }}">
+                Next
+            </button>
+        </form>
+    </div>
+</body>
+</html>

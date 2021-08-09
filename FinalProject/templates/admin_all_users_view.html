@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Admin Dashboard</title>
+  
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/skeleton.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+
+</head>
+<body>
+    <form action="/admin/dashboard" method="post">
+        <button class="button-primary" name="action" value="home" type="submit">Home</button>
+        <button class="button-primary" name="action" value="logout" type="submit">Logout</button>
+    </form>
+    <div class="container">
+        <h2 class="heading">Users</h2>
+        <h5><i>Sorted in descending order</i></h5>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>User created on</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elem in data['users'] %}
+                <tr>
+                    <td>{{ elem[3] }}</td>
+                    <td>{{ elem[1] }}</td>
+                    <td>{{ elem[4] }}</td>
+                    <td>
+                        <form action="/admin/users/{{elem[0]}}" method="post" class="btn-view-user">
+                            <!-- <input type="submit" class="button-primary" value="{{ elem[0] }}"> -->
+                            <button type="submit" class="button-primary" value="{{elem[0]}}">View</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="/admin/users/next_page" method="post">
+            {% if data['page_num'] > 1 %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] - 1 }}">
+                    Prev
+                </button>
+            {% else %}
+                <button 
+                    type="submit" 
+                    class="button-primary btn-next-page-users" 
+                    name="page_num"
+                    value="{{ data['page_num'] }}">
+                    Prev
+                </button>
+            {% endif %}
+
+            <button 
+                type="submit" 
+                class="button-primary btn-next-page-users" 
+                name="page_num" 
+                value="{{ data['page_num'] + 1 }}">
+                Next
+            </button>
+        </form>
+    </div>
+</body>
+</html>
